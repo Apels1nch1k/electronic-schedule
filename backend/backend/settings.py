@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    "rest_framework",
+    
+    'schedule.apps.ScheduleConfig',
 ]
 
 MIDDLEWARE = [
@@ -111,12 +115,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Samara'
 
 USE_I18N = True
 
 USE_TZ = True
 
+DATETIME_FORMAT="%Y-%m-%d%H:%M:%S"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -134,3 +139,9 @@ MEDIA_ROOT = os.path.join(MAIN_DIR, 'media')
 
 MEDIA_URL = "/media/"
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ] 
+}

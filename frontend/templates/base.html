@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Журнал</title>
+</head>
+
+<body class="bg-sky-800 font-mono ">
+    <nav class="h-screen  w-1/4  flex items-center  justify-self-center fixed">
+        <div class="bg-zinc-200 flex  gap-2 flex-col h-4/6 w-1/2 m-auto rounded-md py-4">
+                    <a href="{% url "schedule"%}"
+                class="flex self-center hover:opacity-50 transition-opacity text-lg">Все группы</a>
+            {% for i in group %}
+            <a href="{{ i.get_absolute_url }}"
+                class="flex self-center hover:opacity-50 transition-opacity">{{i.group}}</a>
+            {% endfor %}
+        </div>
+
+    </nav>
+    <main class=" flex justify-center pt-32 ">
+        <div class=" flex  gap-6 flex-col">
+            {% for i in schedule %}
+            <div class=" flex justify-center flex-col gap-3 w-[50vw] bg-white h-42 rounded-md p-4">
+                <a href="{{i.group.get_absolute_url }}" class="text-2xl"> Группа: {{i.group}}</a>
+                <p class="text-lg text-center">Время начало: {{i.time}}</p>
+                <div class="flex flex-col gap-3">
+                    {% for a in i.lessons.all %}
+                        <p class="text-xl text-center">{{ a }}</p>
+                    {% endfor%}
+                </div>               
+
+                <p class="text-right">{{i.created}}</p>
+
+
+            </div>
+            
+
+            {% endfor%}
+        </div>
+    </main>
+
+</body>
+
+</html>
