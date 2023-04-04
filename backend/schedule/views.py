@@ -32,4 +32,5 @@ class ScheduleGroupDetail(ListAPIView):
     def get(self, request, *args, **kwargs):
         queryset = self.queryset.filter(group__pk=self.kwargs['id_group'])
         print(queryset.values())
-        return Response({'schedule' : queryset, "group": GroupSchedule.objects.all()}, template_name="base.html") 
+        print
+        return Response({'schedule' : queryset, "group": GroupSchedule.objects.all(), "group_name" : GroupSchedule.objects.filter(id=self.kwargs['id_group'])}, template_name="base.html") 

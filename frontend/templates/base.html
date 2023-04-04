@@ -12,11 +12,22 @@
 <body class="bg-sky-800 font-mono ">
     <nav class="h-screen  w-1/4  flex items-center  justify-self-center fixed">
         <div class="bg-zinc-200 flex  gap-2 flex-col h-4/6 w-1/2 m-auto rounded-md py-4">
+                {% if group_name.0 %}
                     <a href="{% url "schedule"%}"
-                class="flex self-center hover:opacity-50 transition-opacity text-lg">Все группы</a>
+                    class="flex self-center hover:opacity-50 transition-opacity text-lg">Все группы</a>
+                    
+                {% else %}
+                    <a class="flex self-center text-lg font-bold">Все группы</a>
+                {% endif %}
+
+
             {% for i in group %}
-            <a href="{{ i.get_absolute_url }}"
-                class="flex self-center hover:opacity-50 transition-opacity">{{i.group}}</a>
+                {% if i == group_name.0 %}
+                    <a class="flex self-center font-bold"> {{ i }}</a>
+                {% else  %}
+                <a href="{{ i.get_absolute_url }}"
+                    class="flex self-center hover:opacity-50 transition-opacity">{{i.group}}</a>
+                {% endif %}
             {% endfor %}
         </div>
 
