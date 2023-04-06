@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+
+    {% block content%}
+    <nav class="h-screen  w-1/4  flex items-center justify-self-center fixed">
+        <div class="bg-zinc-200 h-4/6 w-1/2 m-auto rounded-md py-4">
+            <div class=" flex  gap-4 mx-10">
+                {% if user.is_anonymous %}
+                <a class="font-bold hover:opacity-70 transition-opacity text-lg" href="{% url "singin" %}"> Вход</a>
+                <a class="font-bold hover:opacity-70 transition-opacity text-lg" href="{% url "registration" %}"> Регистрация</a>
+
+                {% elif user.is_superuser%}
+                    <a class="font-bold hover:opacity-70 transition-opacity text-lg" href="{% url 'admin:index' %}"> {{ user.username}}</a>
+                    <a class="font-bold hover:opacity-70 transition-opacity text-lg" href="{% url "logout" %}"> Выход</a>
+                {% else %}
+                    <a class="font-bold hover:opacity-70 transition-opacity text-lg" href="{% url "profil" %}"> {{ user.first_name}}</a>
+
+                    <a class="font-bold hover:opacity-70 transition-opacity text-lg" href="{% url "logout" %}"> Выход</a>
+
+                {% endif %}
+            </div>
+            <div class=" flex  gap-2 flex-col mt-10">
+                {% if group_name.0 %}
+                    <a href="{% url "schedule"%}"
+                    class="flex self-center hover:opacity-50 transition-opacity text-lg">Все группы</a>
+                    
+                {% else %}
+                    <a class="flex self-center text-lg font-bold">Все группы</a>
+                {% endif %}
+
+
+                {% for i in group %}
+                    {% if i == group_name.0 %}
+                        <a class="flex self-center font-bold"> {{ i }}</a>
+                    {% else  %}
+                    <a href="{{ i.get_absolute_url }}"
+                        class="flex self-center hover:opacity-50 transition-opacity">{{i.group}}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+    </nav>
+    <main class=" flex justify-center pt-32 ">
+        <div class=" flex  gap-6 flex-col">
+            {% for i in schedule %}
+            <div class=" flex justify-center flex-col gap-3 w-[50vw] bg-white h-42 rounded-md p-4">
+                <a href="{{i.group.get_absolute_url }}" class="text-2xl"> Группа: {{i.group}}</a>
+                <p class="text-lg text-center">Время начало: {{i.time}}</p>
+                <div class="flex flex-col gap-3">
+                    {% for a in i.lessons.all %}
+                        <p class="text-xl text-center">{{ a }}</p>
+                    {% endfor%}
+                </div>               
+
+                <p class="text-right">{{i.created}}</p>
+
+
+            </div>
+            
+
+            {% endfor%}
+        </div>
+    </main>
+    {% endblock %}

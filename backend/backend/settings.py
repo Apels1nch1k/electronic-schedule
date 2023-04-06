@@ -60,6 +60,8 @@ ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES_DIR = os.path.join(FRONTEND_DIR, "templates")
 
+AUTH_USER_MODEL = 'schedule.User'
+LOGOUT_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {

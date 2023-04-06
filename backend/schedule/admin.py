@@ -20,3 +20,7 @@ class AdminLessonSchedule(admin.ModelAdmin):
 @admin.register(TimeSchedule)
 class AdminTimeSchedule(admin.ModelAdmin):
     pass
+
+@admin.register(User)
+class AdminUser(admin.ModelAdmin):
+    pass

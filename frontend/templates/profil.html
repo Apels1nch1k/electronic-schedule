@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+
+    {% block content%}
+    <main class="h-3/2 w-5/6 bg-white my-64 mx-auto rounded-md  p-6">
+        <div class="flex justify-between">
+            <p>{{ user.first_name }} {{ user.last_name}} {{ user.patronymic}} - Группа {{ user.group}}</p>
+            <a href="{% url "logout" %}" class="hover:opacity-70 text-xl"> Выход</a>
+        </div>
+        <div class="my-6 font-bold text-xl">Расписание на сегодня: </div>
+        <div class="flex border justify-center border-sky-600 rounded-md">
+            <div class=" flex justify-center flex-col gap-3 w-[50vw] bg-white h-42 p-4">
+                <a href="{{schedule.group.get_absolute_url }}" class="text-2xl"> Группа: {{schedule.group}}</a>
+                <p class="text-lg text-center">Время начало: {{schedule.time}}</p>
+                <div class="flex flex-col gap-3">
+                    {% for a in schedule.lessons.all %}
+                        <p class="text-xl text-center">{{ a }}</p>
+                    {% endfor%}
+                </div>               
+
+                <p class="text-right">{{schedule.created}}</p>
+
+
+            </div>
+
+        </div>
+    </main>
+    {% endblock %}

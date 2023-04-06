@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
 
 
 
@@ -59,4 +60,6 @@ class Schedule(models.Model):
         verbose_name_plural = 'Раписание групп'
     
     
-    
+class User(AbstractUser):
+    patronymic = models.CharField('Отчество', max_length=255)
+    group = models.ForeignKey(GroupSchedule, related_name="user_group", on_delete=models.CASCADE, null=True, blank=True)
